@@ -14,7 +14,7 @@ class AllIssues extends React.Component {
       issueList: [],
       myButtons: "",
       currentList: [],
-      issue: {}
+      issue: []
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -43,6 +43,7 @@ class AllIssues extends React.Component {
   }
 
   filter(evt) {
+    console.log("filter: ", evt.target.value)
     this.setState({ currentList: this.state.myButtons[evt.target.value] })
   }
 
@@ -66,6 +67,7 @@ class AllIssues extends React.Component {
     evt.preventDefault()
     this.state.issueList.push({
       wc_criterion: evt.target.value,
+      
       notes: this.state.notes,
       priority: this.state.priority,
     })
@@ -90,21 +92,20 @@ class AllIssues extends React.Component {
               >
                 View All
               </Button>
+              
+              <select onChange={this.filter}> 
               {this.state.myButtons
-                ? Object.keys(this.state.myButtons).map((key, index) => (
-                    <span key={index}>
-                      <Button
-                        size="sm"
-                        variant="light"
-                        onClick={this.filter}
-                        value={key}
-                        type="submit"
-                      >
+                ? 
+                Object.keys(this.state.myButtons).map((key, index) => (
+                      <option
+                        key={index}
+                        
+                        value={key}>
                         {key}
-                      </Button>
-                    </span>
+                      </option>
                   ))
                 : null}
+                </select>
             </div>
 
             <form>
@@ -120,14 +121,7 @@ class AllIssues extends React.Component {
               return (
                   <div key={index}>
                     <div>Area of Concern: {elem.field_area_of_concern}</div>
-                    {/* <input
-                      type="checkbox"
-                      id="issue"
-                      name="wc_criterion"
-                      value={elem.field_wc}
-                      onChange={this.handleChange}
-                    />
-                    <label htmlFor="issue">Issue: {elem.field_issue}</label> */}
+                    
                     Issue: {elem.field_issue}
                     <div>WCAG Criterion: {elem.field_wc}</div>
                     <div>
@@ -147,9 +141,7 @@ class AllIssues extends React.Component {
                     <br />
                     <div>Default notes: {elem.field_default_notes}</div>
                     <label htmlFor="notes">My Notes: </label>
-                    <textarea
-                      rows="10"
-                      cols="50"
+                  <textarea
                       id="notes"
                       name="notes"
                       value={notes}

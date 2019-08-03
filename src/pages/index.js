@@ -13,7 +13,8 @@ class AllIssues extends React.Component {
       wc_criterion: "",
       issueList: [],
       myButtons: "",
-      currentList: []
+      currentList: [],
+      issue: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -64,7 +65,7 @@ class AllIssues extends React.Component {
   addIssue(evt) {
     evt.preventDefault()
     this.state.issueList.push({
-      wc_criterion: this.state.wc_criterion,
+      wc_criterion: evt.target.value,
       notes: this.state.notes,
       priority: this.state.priority,
     })
@@ -74,6 +75,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
+   
     return (
       <div className="wrapper">
         <div className="main">
@@ -107,17 +109,26 @@ class AllIssues extends React.Component {
 
             <form>
               <div className="issue">
-                {this.state.currentList.map((elem, index) => (
+
+
+
+
+                
+      {this.state.currentList.map((elem, index) => {
+        let notes, priority
+        
+              return (
                   <div key={index}>
                     <div>Area of Concern: {elem.field_area_of_concern}</div>
-                    <input
+                    {/* <input
                       type="checkbox"
                       id="issue"
                       name="wc_criterion"
                       value={elem.field_wc}
                       onChange={this.handleChange}
                     />
-                    <label htmlFor="issue">Issue: {elem.field_issue}</label>
+                    <label htmlFor="issue">Issue: {elem.field_issue}</label> */}
+                    Issue: {elem.field_issue}
                     <div>WCAG Criterion: {elem.field_wc}</div>
                     <div>
                       <a href={elem.field_understanding_link}>
@@ -130,7 +141,7 @@ class AllIssues extends React.Component {
                       id="priority"
                       name="priority"
                       placeholder={elem.field_default_priority}
-                      value={this.state.priority}
+                      value={priority}
                       onChange={this.handleChange}
                     />
                     <br />
@@ -141,21 +152,22 @@ class AllIssues extends React.Component {
                       cols="50"
                       id="notes"
                       name="notes"
-                      value={this.state.notes}
+                      value={notes}
                       onChange={this.handleChange}
                     />
-                    <button onClick={this.addIssue} type="submit">
+                    <button value={elem.field_wc} onClick={this.addIssue} type="submit">
                       Add Issue to Report
                     </button>
                   </div>
-                ))}
+                )}
+      )}
               </div>{" "}
             </form>
           </Layout>
         </div>
 
         <div className="sidebar">
-          <table className="sopretty" role="presentation">
+          <table className="sopretty">
             <thead>
               <tr>
                 <th>#</th>

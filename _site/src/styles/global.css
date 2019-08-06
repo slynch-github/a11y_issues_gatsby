@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main,
+/* .sidebar, */
+.issue {
+  border: 3px solid black;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.main {
+  width: 60%;
+	height: 100%;
+	
+}
+
+textarea {
+  width: 100%;
+  min-height: 200px;
+}
+
+.sidebar {
+  width: 40%;
+	height: 50%;
+	position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 15px;
+
+}
+
+body {
+  background-color: #ccc;
+  font-family: sans-serif;
+  padding: 10px;
+}

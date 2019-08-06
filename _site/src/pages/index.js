@@ -24,7 +24,6 @@ class AllIssues extends React.Component {
   }
 
   componentDidMount() {
-    // set a myToolList object and filter results based on testing tool (only difference is the field is an array of options)
     let myButtonList = {}
     this.props.data.allNodeIssue.edges.forEach(elem => {
       if (!(elem.node.field_area_of_concern in myButtonList)) {
@@ -78,7 +77,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-    console.log("data: ", data.allNodeIssue.edges)
+   
     return (
       <div className="wrapper">
         <div className="main">
@@ -108,20 +107,7 @@ class AllIssues extends React.Component {
                 : null}
                 </select>
             </div>
-            
-            {/* <select onChange={this.filter}> 
-              {this.state.myButtons
-                ? 
-                Object.keys(this.state.myButtons).map((key, index) => (
-                      <option
-                        key={index}
-                        
-                        value={key}>
-                        {key}
-                      </option>
-                  ))
-                : null}
-                </select> */}
+
             <form>
               <div className="issue">
 
@@ -214,7 +200,6 @@ export const query = graphql`
           field_area_of_concern
           field_wc
           field_understanding_link
-          field_how_to_test
         }
       }
     }

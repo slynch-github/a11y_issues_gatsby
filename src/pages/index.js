@@ -222,7 +222,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
                 <ul key={index}>
                   <li>
                   <label htmlFor="name">{index + 1}</label><input type="text" id="name" name="name" value={index + 1}/></li>
-                  <li><label htmlFor="name">{elem.wc_criterion}</label><input type="text" id="name" name="name" value={elem.wc_criterion}/></li>
+                  <li><label htmlFor="wc_criterion">{elem.wc_criterion}</label><input type="text" id="wc_criterion" name="wc_criterion" value={elem.wc_criterion}/></li>
                   {/* <li>{elem.notes}</li>
                   <li>{elem.priority}</li> */}
                 </ul>

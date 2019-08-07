@@ -88,6 +88,20 @@ class AllIssues extends React.Component {
     })
     this.setState({ wc_criterion: "", notes: "", priority: "" })
   }
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const form = e.target
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': form.getAttribute('name'),
+        ...state.issueList[0],
+      }),
+    })
+      .then(() => navigate(form.getAttribute('action')))
+      .catch((error) => alert(error))
+  }
 
   render() {
     const { data } = this.props
@@ -212,7 +226,17 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
           </table>
         </div>
 
-
+        <form
+        name="contact"
+        method="post"
+        action="/thanks/"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <button type="submit">Send</button>
+      </form>
 
       </div>
     )

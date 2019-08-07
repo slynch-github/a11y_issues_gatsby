@@ -3,7 +3,11 @@ import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import { Button } from "react-bootstrap"
 import "bootstrap/dist/css/bootstrap.css"
-
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&')
+}
 class AllIssues extends React.Component {
   constructor(props) {
     super(props)

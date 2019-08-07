@@ -186,7 +186,7 @@ class AllIssues extends React.Component {
         </div>
 
         <div className="sidebar">
-        <form name="contact" method="POST" data-netlify="true">
+        <form name="contact" method="POST" data-netlify="true" action="/">
         <p>
     <label>Your Name: <input type="text" name="name" /></label>   
   </p>

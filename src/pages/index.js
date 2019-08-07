@@ -136,12 +136,8 @@ class AllIssues extends React.Component {
                   ))
                 : null}
                 </select> */}
-            <form>
+            <form name="contact" method="POST" data-netlify="true">
               <div className="issue">
-
-
-
-
 
       {this.state.currentList.map((elem, index) => {
         let notes, priority
@@ -153,6 +149,7 @@ class AllIssues extends React.Component {
                     Issue: {elem.field_issue}
                     <div>How to Test: {elem.field_how_to_test}</div>
                     <div>WCAG Criterion: {elem.field_wc}</div>
+                    <input name="WCAG Criterion">{elem.field_wc}</input>
                     <div>
                       <a href={elem.field_understanding_link}>
                         Understanding the Criterion
@@ -162,7 +159,7 @@ class AllIssues extends React.Component {
                     <input
                       type="text"
                       id="priority"
-                      name="priority"
+                      name="Priority"
                       placeholder={elem.field_default_priority}
                       value={priority}
                       onChange={this.handleChange}
@@ -172,7 +169,7 @@ class AllIssues extends React.Component {
                     <label htmlFor="notes">My Notes: </label>
                   <textarea
                       id="notes"
-                      name="notes"
+                      name="Description"
                       value={notes}
                       onChange={this.handleChange}
                     />
@@ -188,7 +185,27 @@ class AllIssues extends React.Component {
         </div>
 
         <div className="sidebar">
-          <table className="sopretty">
+        {/* <form name="contact" method="POST" data-netlify="true">
+        <p>
+    <label>Your Name: <input type="text" name="name" /></label>   
+  </p>
+  <p>
+    <label>Your Email: <input type="email" name="email" /></label>
+  </p>
+  <p>
+    <label>Your Role: <select name="role[]" multiple>
+      <option value="leader">Leader</option>
+      <option value="follower">Follower</option>
+    </select></label>
+  </p>
+  <p>
+    <label>Message: <textarea name="message"></textarea></label>
+  </p>
+  <p>
+    <button type="submit">Send</button>
+  </p>
+</form> */}
+          {/* <table className="sopretty">
             <thead>
               <tr>
                 <th>#</th>
@@ -207,7 +224,7 @@ class AllIssues extends React.Component {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table> */}
         </div>
 
 

@@ -136,7 +136,7 @@ class AllIssues extends React.Component {
                   ))
                 : null}
                 </select> */}
-            <form name="contact" method="POST" data-netlify="true" action="/">
+            <form>
               <div className="issue">
 
       {this.state.currentList.map((elem, index) => {
@@ -148,9 +148,8 @@ class AllIssues extends React.Component {
 
                     Issue: {elem.field_issue}
                     <div>How to Test: {elem.field_how_to_test}</div>
-                    {/* <div>WCAG Criterion: {elem.field_wc}</div> */}
-                    <label htmlFor="wcagcriterion">WCAG Criterion</label><input id="wcagcriterion" type="text" placeholder={elem.field_wc} name="wcagcriterion">
-                    </input>
+                    <div>WCAG Criterion: {elem.field_wc}</div>
+            
                     <div>
                       <a href={elem.field_understanding_link}>
                         Understanding the Criterion
@@ -174,7 +173,7 @@ class AllIssues extends React.Component {
                       value={notes}
                       onChange={this.handleChange}
                     />
-                    <button type="submit">
+                    <button value={elem.field_wc} onClick={this.addIssue} type="submit">
                       Add Issue to Report
                     </button>
                   </div>
@@ -186,28 +185,11 @@ class AllIssues extends React.Component {
         </div>
 
         <div className="sidebar">
-        <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field">
-<input type="hidden" name="form-name" value="contact" />
+      
+{/* Netlify will only allow 100 submissions/month for free */}
+{/* see example
+https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
 
-        <p>
-    <label>Your Name: <input type="text"  name="name" /></label>   
-  </p>
-  <p>
-    <label>Your Email: <input type="email" name="email" /></label>
-  </p>
-  <p>
-    <label>Your Role: <select name="role[]" multiple>
-      <option value="leader">Leader</option>
-      <option value="follower">Follower</option>
-    </select></label>
-  </p>
-  <p>
-    <label>Message: <textarea name="message"></textarea></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
-</form>
           <table className="sopretty">
             <thead>
               <tr>

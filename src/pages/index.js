@@ -17,6 +17,7 @@ class AllIssues extends React.Component {
       priority: "",
       wc_criterion: "",
       issueList: [],
+      test: {name: "Sarah", middle: "Elizabeth", last: "Lynch"},
       myButtons: "",
       myTools: "",
       currentList: [],
@@ -101,7 +102,7 @@ class AllIssues extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        ...this.state.issueList[0],
+        ...this.state.test,
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
@@ -111,7 +112,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-
+console.log("issueList: ", this.state.test)
     return (
       <div className="wrapper">
         <div className="main">

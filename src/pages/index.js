@@ -123,7 +123,7 @@ class AllIssues extends React.Component {
                 </select>
             </div>
 
-            <select onChange={this.filterTools}>
+            {/* <select onChange={this.filterTools}>
               {this.state.myTools
                 ?
                 Object.keys(this.state.myTools).map((key, index) => (
@@ -135,7 +135,7 @@ class AllIssues extends React.Component {
                       </option>
                   ))
                 : null}
-                </select>
+                </select> */}
             <form>
               <div className="issue">
 

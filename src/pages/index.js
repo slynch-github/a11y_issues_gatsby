@@ -101,7 +101,7 @@ class AllIssues extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        ...this.state.issueList[0],
+        ...this.state.issueList,
       }),
     })
       .then(() => navigate(form.getAttribute('action')))

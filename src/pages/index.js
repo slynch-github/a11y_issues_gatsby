@@ -136,7 +136,7 @@ class AllIssues extends React.Component {
                   ))
                 : null}
                 </select> */}
-            <form name="contact" method="POST" data-netlify="true">
+            <form name="contact" method="POST" data-netlify="true" action="/">
               <div className="issue">
 
       {this.state.currentList.map((elem, index) => {
@@ -186,7 +186,7 @@ class AllIssues extends React.Component {
         </div>
 
         <div className="sidebar">
-        {/* <form name="contact" method="POST" data-netlify="true">
+        <form name="contact" method="POST" data-netlify="true">
         <p>
     <label>Your Name: <input type="text" name="name" /></label>   
   </p>
@@ -205,8 +205,8 @@ class AllIssues extends React.Component {
   <p>
     <button type="submit">Send</button>
   </p>
-</form> */}
-          {/* <table className="sopretty">
+</form>
+          <table className="sopretty">
             <thead>
               <tr>
                 <th>#</th>
@@ -225,7 +225,7 @@ class AllIssues extends React.Component {
                 </tr>
               ))}
             </tbody>
-          </table> */}
+          </table>
         </div>
 
 

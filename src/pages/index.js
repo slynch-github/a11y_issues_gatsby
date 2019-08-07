@@ -112,7 +112,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-console.log("issueList: ", this.state.test)
+console.log("TESTList: ", this.state.test)
     return (
       <div className="wrapper">
         <div className="main">
@@ -218,7 +218,16 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <label htmlFor="name">Name</label><input type="text" id="name" name="name"/>
+        {this.state.issueList.map((elem, index) => (
+                <ul key={index}>
+                  <li>
+                  <label htmlFor="name">{index + 1}</label><input type="text" id="name" name="name" value={index + 1}/></li>
+                  <li><label htmlFor="name">{wc_criterion}</label><input type="text" id="name" name="name" value={wc_criterion}/></li>
+                  {/* <li>{elem.notes}</li>
+                  <li>{elem.priority}</li> */}
+                </ul>
+              ))}
+
         <button type="submit">Send</button>
       </form>
           <table className="sopretty">

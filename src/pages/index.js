@@ -187,20 +187,22 @@ class AllIssues extends React.Component {
 
         <div className="sidebar">
         <form name="contact" method="POST" data-netlify="true" action="/">
+<input type="hidden" name="form-name" value="contact" />
+
         <p>
-    <label>Your Name: <input type="text"  name="form-name" name="name" /></label>   
+    <label>Your Name: <input type="text"  name="name" /></label>   
   </p>
   <p>
-    <label>Your Email: <input type="email" name="form-name" name="email" /></label>
+    <label>Your Email: <input type="email" name="email" /></label>
   </p>
   <p>
     <label>Your Role: <select name="role[]" multiple>
-      <option name="form-name" value="leader">Leader</option>
-      <option name="form-name" value="follower">Follower</option>
+      <option value="leader">Leader</option>
+      <option value="follower">Follower</option>
     </select></label>
   </p>
   <p>
-    <label>Message: <textarea name="form-name" name="message"></textarea></label>
+    <label>Message: <textarea name="message"></textarea></label>
   </p>
   <p>
     <button type="submit">Send</button>

@@ -13,6 +13,7 @@ class AllIssues extends React.Component {
       wc_criterion: "",
       issueList: [],
       myButtons: "",
+      myTools: "",
       currentList: [],
       issue: []
     }
@@ -20,12 +21,23 @@ class AllIssues extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.addIssue = this.addIssue.bind(this)
     this.filter = this.filter.bind(this)
+    this.filterTools = this.filterTools.bind(this)
     this.viewAll = this.viewAll.bind(this)
   }
 
   componentDidMount() {
-    // set a myToolList object and filter results based on testing tool (only difference is the field is an array of options)
+
     let myButtonList = {}
+    let myToolList = {}
+    this.props.data.allNodeIssue.edges.forEach(elem => {
+     for (let i=0; i<elem.node.field_how_to_test.length; i++){
+      if (!(elem.node.field_how_to_test[i] in myToolList)) {
+        myToolList[elem.node.field_how_to_test[i]] = [elem.node]
+      } else {
+        myToolList[elem.node.field_how_to_test[i]].push(elem.node)
+      }
+    }
+    })
     this.props.data.allNodeIssue.edges.forEach(elem => {
       if (!(elem.node.field_area_of_concern in myButtonList)) {
         myButtonList[elem.node.field_area_of_concern] = [elem.node]
@@ -40,12 +52,14 @@ class AllIssues extends React.Component {
         newArray.push(currentElem)
       }
     }
-    this.setState({ currentList: newArray, myButtons: myButtonList })
+    this.setState({ currentList: newArray, myButtons: myButtonList, myTools: myToolList })
   }
 
   filter(evt) {
-    console.log("filter: ", evt.target.value)
     this.setState({ currentList: this.state.myButtons[evt.target.value] })
+  }
+  filterTools(evt) {
+    this.setState({ currentList: this.state.myTools[evt.target.value] })
   }
 
   viewAll() {
@@ -68,7 +82,7 @@ class AllIssues extends React.Component {
     evt.preventDefault()
     this.state.issueList.push({
       wc_criterion: evt.target.value,
-      
+
       notes: this.state.notes,
       priority: this.state.priority,
     })
@@ -78,12 +92,12 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-    console.log("data: ", data.allNodeIssue.edges)
+
     return (
       <div className="wrapper">
         <div className="main">
           <Layout>
-      
+
             <div className="buttonFilters">
               <Button
                 size="sm"
@@ -93,14 +107,14 @@ class AllIssues extends React.Component {
               >
                 View All
               </Button>
-              
-              <select onChange={this.filter}> 
+
+              <select onChange={this.filter}>
               {this.state.myButtons
-                ? 
+                ?
                 Object.keys(this.state.myButtons).map((key, index) => (
                       <option
                         key={index}
-                        
+
                         value={key}>
                         {key}
                       </option>
@@ -108,35 +122,36 @@ class AllIssues extends React.Component {
                 : null}
                 </select>
             </div>
-            
-            {/* <select onChange={this.filter}> 
-              {this.state.myButtons
-                ? 
-                Object.keys(this.state.myButtons).map((key, index) => (
+
+            <select onChange={this.filterTools}>
+              {this.state.myTools
+                ?
+                Object.keys(this.state.myTools).map((key, index) => (
                       <option
                         key={index}
-                        
+
                         value={key}>
                         {key}
                       </option>
                   ))
                 : null}
-                </select> */}
+                </select>
             <form>
               <div className="issue">
 
 
 
 
-                
+
       {this.state.currentList.map((elem, index) => {
         let notes, priority
-        
+
               return (
                   <div key={index}>
                     <div>Area of Concern: {elem.field_area_of_concern}</div>
-                    
+
                     Issue: {elem.field_issue}
+                    <div>How to Test: {elem.field_how_to_test}</div>
                     <div>WCAG Criterion: {elem.field_wc}</div>
                     <div>
                       <a href={elem.field_understanding_link}>
@@ -194,7 +209,7 @@ class AllIssues extends React.Component {
             </tbody>
           </table>
         </div>
-        
+
 
 
       </div>

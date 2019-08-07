@@ -203,7 +203,17 @@ class AllIssues extends React.Component {
 {/* Netlify will only allow 100 submissions/month for free */}
 {/* see example
 https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
-
+<form
+        name="contact"
+        method="post"
+        action="/thanks/"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit}
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <button type="submit">Send</button>
+      </form>
           <table className="sopretty">
             <thead>
               <tr>
@@ -226,17 +236,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
           </table>
         </div>
 
-        <form
-        name="contact"
-        method="post"
-        action="/thanks/"
-        data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        onSubmit={handleSubmit}
-      >
-        <input type="hidden" name="form-name" value="contact" />
-        <button type="submit">Send</button>
-      </form>
+        
 
       </div>
     )

@@ -148,8 +148,9 @@ class AllIssues extends React.Component {
 
                     Issue: {elem.field_issue}
                     <div>How to Test: {elem.field_how_to_test}</div>
-                    <div>WCAG Criterion: {elem.field_wc}</div>
-                    <input name="WCAG Criterion">{elem.field_wc}</input>
+                    {/* <div>WCAG Criterion: {elem.field_wc}</div> */}
+                    <label htmlFor="wcagcriterion">WCAG Criterion</label><input id="wcagcriterion" type="text" placeholder={elem.field_wc} name="wcagcriterion">
+                    </input>
                     <div>
                       <a href={elem.field_understanding_link}>
                         Understanding the Criterion
@@ -159,7 +160,7 @@ class AllIssues extends React.Component {
                     <input
                       type="text"
                       id="priority"
-                      name="Priority"
+                      name="priority"
                       placeholder={elem.field_default_priority}
                       value={priority}
                       onChange={this.handleChange}
@@ -169,11 +170,11 @@ class AllIssues extends React.Component {
                     <label htmlFor="notes">My Notes: </label>
                   <textarea
                       id="notes"
-                      name="Description"
+                      name="notes"
                       value={notes}
                       onChange={this.handleChange}
                     />
-                    <button value={elem.field_wc} onClick={this.addIssue} type="submit">
+                    <button type="submit">
                       Add Issue to Report
                     </button>
                   </div>

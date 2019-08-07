@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import { Button } from "react-bootstrap"
+import { navigate } from 'gatsby-link'
 import "bootstrap/dist/css/bootstrap.css"
 function encode(data) {
   return Object.keys(data)
@@ -100,7 +101,7 @@ class AllIssues extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        ...state.issueList[0],
+        ...this.state.issueList[0],
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
@@ -213,9 +214,10 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         action="/thanks/"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
-        onSubmit={handleSubmit}
+        onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
+        <label htmlFor="name">Name</label><input type="text" id="name" name="name"/>
         <button type="submit">Send</button>
       </form>
           <table className="sopretty">

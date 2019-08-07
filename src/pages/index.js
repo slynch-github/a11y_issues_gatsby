@@ -101,7 +101,7 @@ class AllIssues extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        ...this.state.issueList,
+        ...this.state.issueList[0],
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
@@ -168,7 +168,7 @@ class AllIssues extends React.Component {
                     Issue: {elem.field_issue}
                     <div>How to Test: {elem.field_how_to_test}</div>
                     <div>WCAG Criterion: {elem.field_wc}</div>
-            
+
                     <div>
                       <a href={elem.field_understanding_link}>
                         Understanding the Criterion
@@ -204,7 +204,7 @@ class AllIssues extends React.Component {
         </div>
 
         <div className="sidebar">
-      
+
 {/* Netlify will only allow 100 submissions/month for free */}
 {/* see example
 https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
@@ -242,7 +242,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
           </table>
         </div>
 
-        
+
 
       </div>
     )

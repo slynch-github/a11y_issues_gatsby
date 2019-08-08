@@ -17,7 +17,7 @@ class AllIssues extends React.Component {
       priority: "",
       wc_criterion: "",
       issueList: [],
-      // test: {name: "", middle: "", last: ""},
+      test: {name: "", middle: "", last: ""},
       testname: "hi",
       testmiddle: "",
       testlast: "",
@@ -107,7 +107,7 @@ class AllIssues extends React.Component {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({
         'form-name': form.getAttribute('name'),
-        ...this.state.test,
+        ...this.state,
       }),
     })
       .then(() => navigate(form.getAttribute('action')))
@@ -223,9 +223,9 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <label htmlFor="name">Name</label><input type="text" id="name" name="testname" onChange={this.handleChange}/>
-        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="testmiddle" onChange={this.handleChange}/>
-        <label htmlFor="last">Last</label><input type="text" id="last" name="testlast" onChange={this.handleChange}/>
+        <label htmlFor="name">Name</label><input type="text" id="name" name="formname" onChange={this.handleChange}/>
+        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="formmiddle" onChange={this.handleChange}/>
+        <label htmlFor="last">Last</label><input type="text" id="last" name="formlast" onChange={this.handleChange}/>
 
         <button type="submit">Test</button>
       </form>

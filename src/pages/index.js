@@ -89,6 +89,8 @@ class AllIssues extends React.Component {
 
   addIssue(evt) {
     evt.preventDefault()
+    //create 3 new variables every time?
+    this.setState({name: evt.target.value})
     this.state.issueList.push({
       wc_criterion: evt.target.value,
 
@@ -107,7 +109,8 @@ class AllIssues extends React.Component {
       let formWCcriterion = elem.wc_criterion
       let formNotes = elem.notes
      let formPriority = elem.priority
-      this.setState({name1: formWCcriterion, name2: formNotes, name3: formPriority})
+     this.setState((state, ) => ({ name1: state.formWCcriterion, name2: state.formNotes, name3: state.formPriority}))
+     //how to set state with this???  or should I set state as an issue is saved???  
     })
     const form = e.target
     fetch('/', {
@@ -125,7 +128,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-console.log("come on!!!: ", this.state)
+console.log("criterion e: ", this.state.criterion)
     return (
       <div className="wrapper">
         <div className="main">

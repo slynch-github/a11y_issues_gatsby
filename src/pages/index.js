@@ -99,6 +99,16 @@ class AllIssues extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
+    this.state.issueList.forEach((elem, index) => {
+      //in an object
+      this.state.name1 = `formCriterion` + index
+      this.state.name2 = `formNotes` + index
+      this.state.name3 = `formPriority` + index
+      let formWCcriterion = elem.wc_criterion
+      let formNotes = elem.notes
+     let formPriority = elem.priority
+      this.setState({name1: formWCcriterion, name2: formNotes, name3: formPriority})
+    })
     const form = e.target
     fetch('/', {
       method: 'POST',
@@ -115,7 +125,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-console.log("hellooooos: ", this.state)
+console.log("come on!!!: ", this.state)
     return (
       <div className="wrapper">
         <div className="main">
@@ -229,7 +239,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
     </select></label>
         <label htmlFor="last">Last</label><input type="text" id="last" name="testlast" onChange={this.handleChange}/>
 
-        <button name="issue" value="hello" type="submit">Test</button>
+        <button type="submit">Test</button>
       </form>
 <form
         name="contact"

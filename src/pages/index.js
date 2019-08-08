@@ -18,9 +18,7 @@ class AllIssues extends React.Component {
       wc_criterion: "",
       issueList: [],
       test: {name: "", middle: "", last: ""},
-      testname: "",
-      testmiddle: "",
-      testlast: "",
+      
       myButtons: "",
       myTools: "",
       currentList: [],
@@ -117,7 +115,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-console.log("this.statesss: ", this.state)
+console.log("hellooooos: ", this.state)
     return (
       <div className="wrapper">
         <div className="main">

@@ -17,7 +17,10 @@ class AllIssues extends React.Component {
       priority: "",
       wc_criterion: "",
       issueList: [],
-      test: {name: "", middle: "", last: ""},
+      // test: {name: "", middle: "", last: ""},
+      testname: "hi",
+      testmiddle: "",
+      testlast: "",
       myButtons: "",
       myTools: "",
       currentList: [],
@@ -80,11 +83,12 @@ class AllIssues extends React.Component {
   }
 
   handleChange(evt) {
+    // console.log("evt.name and evt.value: ", evt.target.name, evt.target.value)
     const name = evt.target.name
     const value = evt.target.value
     this.setState({ [name]: value })
   }
- 
+
   addIssue(evt) {
     evt.preventDefault()
     this.state.issueList.push({
@@ -113,7 +117,7 @@ class AllIssues extends React.Component {
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-console.log("TESTList: ", this.state.test)
+console.log("this.state: ", this.state)
     return (
       <div className="wrapper">
         <div className="main">
@@ -219,9 +223,9 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <label htmlFor="name">Name</label><input type="text" id="name" name="name" value="Bob" onChange={this.handleChange}/>
-        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="middle" value="Jim" onChange={this.handleChange}/>
-        <label htmlFor="last">Last</label><input type="text" id="last" name="last" value="Smith" onChange={this.handleChange}/>
+        <label htmlFor="name">Name</label><input type="text" id="name" name="testname" onChange={this.handleChange}/>
+        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="testmiddle" onChange={this.handleChange}/>
+        <label htmlFor="last">Last</label><input type="text" id="last" name="testlast" onChange={this.handleChange}/>
 
         <button type="submit">Test</button>
       </form>

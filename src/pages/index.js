@@ -223,6 +223,10 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         <input type="hidden" name="form-name" value="contact" />
         <label htmlFor="name">Name</label><input type="text" id="name" name="testname" onChange={this.handleChange}/>
         <label htmlFor="middle">Middle</label><input type="text" id="middle" name="testmiddle" onChange={this.handleChange}/>
+        <label>Your Role: <select name="role[]" multiple onChange={this.handleChange}>
+      <option value="leader">Leader</option>
+      <option value="follower">Follower</option>
+    </select></label>
         <label htmlFor="last">Last</label><input type="text" id="last" name="testlast" onChange={this.handleChange}/>
 
         <button type="submit">Test</button>

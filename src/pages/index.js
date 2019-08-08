@@ -17,7 +17,7 @@ class AllIssues extends React.Component {
       priority: "",
       wc_criterion: "",
       issueList: [],
-      test: {name: "Sarah", middle: "Elizabeth", last: "Lynch"},
+      test: {name: "", middle: "", last: ""},
       myButtons: "",
       myTools: "",
       currentList: [],
@@ -84,6 +84,7 @@ class AllIssues extends React.Component {
     const value = evt.target.value
     this.setState({ [name]: value })
   }
+ 
   addIssue(evt) {
     evt.preventDefault()
     this.state.issueList.push({
@@ -218,9 +219,9 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <label htmlFor="name">Name</label><input type="text" id="name" name="name" value="Bob"/>
-        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="middle" value="Jim"/>
-        <label htmlFor="last">Last</label><input type="text" id="last" name="last" value="Smith"/>
+        <label htmlFor="name">Name</label><input type="text" id="name" name="name" value="Bob" onChange={this.handleChange}/>
+        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="middle" value="Jim" onChange={this.handleChange}/>
+        <label htmlFor="last">Last</label><input type="text" id="last" name="last" value="Smith" onChange={this.handleChange}/>
 
         <button type="submit">Test</button>
       </form>

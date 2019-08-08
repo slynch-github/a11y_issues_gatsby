@@ -218,6 +218,20 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
+        <label htmlFor="name">Name</label><input type="text" id="name" name="name" value="Bob"/>
+ 
+
+        <button type="submit">Test</button>
+      </form>
+<form
+        name="contact"
+        method="post"
+        action="/thanks/"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={this.handleSubmit}
+      >
+        <input type="hidden" name="form-name" value="contact" />
         {this.state.issueList.map((elem, index) => (
                 <ul key={index}>
                   <li>

@@ -219,7 +219,8 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
       >
         <input type="hidden" name="form-name" value="contact" />
         <label htmlFor="name">Name</label><input type="text" id="name" name="name" value="Bob"/>
- 
+        <label htmlFor="middle">Middle</label><input type="text" id="middle" name="middle" value="Jim"/>
+        <label htmlFor="last">Last</label><input type="text" id="last" name="last" value="Smith"/>
 
         <button type="submit">Test</button>
       </form>

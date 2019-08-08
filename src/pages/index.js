@@ -18,7 +18,6 @@ class AllIssues extends React.Component {
       wc_criterion: "",
       issueList: [],
       test: {name: "", middle: "", last: ""},
-      
       myButtons: "",
       myTools: "",
       currentList: [],
@@ -89,8 +88,7 @@ class AllIssues extends React.Component {
 
   addIssue(evt) {
     evt.preventDefault()
-    //create 3 new variables every time?
-    this.setState({name: evt.target.value})
+    
     this.state.issueList.push({
       wc_criterion: evt.target.value,
 
@@ -101,17 +99,6 @@ class AllIssues extends React.Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    this.state.issueList.forEach((elem, index) => {
-      //in an object
-      this.state.name1 = `formCriterion` + index
-      this.state.name2 = `formNotes` + index
-      this.state.name3 = `formPriority` + index
-      let formWCcriterion = elem.wc_criterion
-      let formNotes = elem.notes
-     let formPriority = elem.priority
-     this.setState((state, ) => ({ name1: state.formWCcriterion, name2: state.formNotes, name3: state.formPriority}))
-     //how to set state with this???  or should I set state as an issue is saved???  
-    })
     const form = e.target
     fetch('/', {
       method: 'POST',

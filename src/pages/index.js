@@ -212,7 +212,7 @@ console.log("criterion e: ", this.state.criterion)
 {/* Netlify will only allow 100 submissions/month for free */}
 {/* see example
 https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
-<form
+{/* <form
         name="contact"
         method="post"
         action="/thanks/"
@@ -230,7 +230,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         <label htmlFor="lastname">Yup</label><input type="text" id="lastname" name="testlast" onChange={this.handleChange}/>
 
         <button type="submit">Test</button>
-      </form>
+      </form> */}
 <form
         name="contact"
         method="post"

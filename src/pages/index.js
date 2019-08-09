@@ -227,7 +227,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
       <option value="leader">Maybe</option>
       <option value="follower">Yes</option>
     </select></label>
-        <label htmlFor="last">Last</label><input type="text" id="last" name="testlast" onChange={this.handleChange}/>
+        <label htmlFor="lastname">Lasttt</label><input type="text" id="lastname" name="testlast" onChange={this.handleChange}/>
 
         <button type="submit">Test</button>
       </form>

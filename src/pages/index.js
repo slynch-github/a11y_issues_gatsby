@@ -232,14 +232,14 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         <button type="submit">Test</button>
       </form> */}
 <form
-        name="contact"
+        name="myForm"
         method="post"
         action="/thanks/"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={this.handleSubmit}
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value="myForm" />
         {this.state.issueList.map((elem, index) => (
                 <ul key={index}>
                   <li>

@@ -240,7 +240,15 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
         onSubmit={this.handleSubmit}
       >
         <input type="hidden" name="form-name" value="myForm" />
-        {this.state.issueList.map((elem, index) => (
+<ul>
+        <li>
+                  <label htmlFor="name">My Label</label><input type="text" id="name" name="name" onChange={this.handleChange}/>
+                  </li>
+                  <li>
+                  <label htmlFor="wc_criterion">criterion</label><input type="text" id="wc_criterion" name="wc_criterion" onChange={this.handleChange}/></li>
+      </ul>
+      
+        {/* {this.state.issueList.map((elem, index) => (
                 <ul key={index}>
                   <li>
                   <label htmlFor="name">My Label</label><input type="text" id="name" name="name" onChange={this.handleChange}/>
@@ -249,9 +257,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
                   <label htmlFor="wc_criterion">{elem.wc_criterion}</label><input type="text" id="wc_criterion" name="wc_criterion" onChange={this.handleChange}/></li>
                   {/* <li>{elem.notes}</li>
                   <li>{elem.priority}</li> */}
-                </ul>
-              ))}
-
+     
         <button type="submit">Send</button>
       </form>
           <table className="sopretty">

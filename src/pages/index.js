@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import { Button } from "react-bootstrap"
 import "bootstrap/dist/css/bootstrap.css"
 
+
 class AllIssues extends React.Component {
   constructor(props) {
     super(props)
@@ -15,7 +16,10 @@ class AllIssues extends React.Component {
       myButtons: "",
       myTools: "",
       currentList: [],
-      issue: []
+      issue: [],
+      count: 0,
+      finalCookieArray: [],
+      cookies: ""
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -23,7 +27,9 @@ class AllIssues extends React.Component {
     this.filter = this.filter.bind(this)
     this.filterTools = this.filterTools.bind(this)
     this.viewAll = this.viewAll.bind(this)
+    this.clearCookies = this.clearCookies.bind(this)
   }
+
 
   componentDidMount() {
 
@@ -81,19 +87,44 @@ class AllIssues extends React.Component {
 
   addIssue(evt) {
     evt.preventDefault()
+    this.state.count++
+    let cookieArray = ["wc_criterion="+evt.target.value, "notes="+this.state.notes, "priority="+this.state.priority]
+  
+   //this.state.finalCookieArray.push(cookieArray)
+//     let cookies = "wc_criterion="+evt.target.value+" notes="+this.state.notes+" priority="+this.state.priority+""
+//  document.cookie = cookies
+    //save the issues on a cookie!
     
     this.state.issueList.push({
       wc_criterion: evt.target.value,
-
       notes: this.state.notes,
       priority: this.state.priority,
     })
+
+let cookieString = cookieArray.join(" ")
+//console.log("cookie Array: ", cookieArray)
+//["wc_criterion=2.4.2 Page Titled", "notes=hello", "priority=high"]
+//console.log("cookie String: ", cookieString)
+this.state.cookies = this.state.cookies + " " + cookieString
+//wc_criterion=2.4.2 Page Titled notes=hello priority=high
+//"wc_criterion=2.4.2 Page Titled notes=hello priority=high"
+document.cookie = this.state.cookies
+//add to an array that i can loop over now for the table
+
     this.setState({ wc_criterion: "", notes: "", priority: "" })
+    
   }
+
+clearCookies(){
+  document.cookie = 'wc_criterion=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
   
+}
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
+
+
+console.log("cookie: ", document.cookie)
 
     return (
       <div className="wrapper">
@@ -213,6 +244,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
               ))}
             </tbody>
           </table>
+          <button onClick={this.clearCookies}>Clear Cookies</button>
         </div>
 
 

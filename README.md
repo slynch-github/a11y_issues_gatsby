@@ -12,5 +12,5 @@ Things I am learning more about while working on this site:
 * GraphQL
 * using Gatsby plugins
 * deploying on Netlify
-* using the window object with Gatsby
+* using the window object with Gatsby/React
 * using cookies

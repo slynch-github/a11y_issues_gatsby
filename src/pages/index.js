@@ -88,13 +88,13 @@ class AllIssues extends React.Component {
   addIssue(evt) {
     evt.preventDefault()
     this.state.count++
-    let cookieArray = ["wc_criterion="+evt.target.value, "notes="+this.state.notes, "priority="+this.state.priority]
-  
+    let cookieArray = ["*="+evt.target.value, "*="+this.state.notes, "*="+this.state.priority]
+
    //this.state.finalCookieArray.push(cookieArray)
 //     let cookies = "wc_criterion="+evt.target.value+" notes="+this.state.notes+" priority="+this.state.priority+""
 //  document.cookie = cookies
     //save the issues on a cookie!
-    
+
     this.state.issueList.push({
       wc_criterion: evt.target.value,
       notes: this.state.notes,
@@ -107,22 +107,41 @@ let cookieString = cookieArray.join(" ")
 //console.log("cookie String: ", cookieString)
 this.state.cookies = this.state.cookies + " " + cookieString
 //wc_criterion=2.4.2 Page Titled notes=hello priority=high
-//"wc_criterion=2.4.2 Page Titled notes=hello priority=high"
+//"*=2.4.2 Page Titled *=hello *=high"
 document.cookie = this.state.cookies
+//let newCookieArray = document.cookie.split("*=")
+//console.log("newCookieArray: ", newCookieArray)
 //add to an array that i can loop over now for the table
 
     this.setState({ wc_criterion: "", notes: "", priority: "" })
-    
+
   }
 
 clearCookies(){
-  document.cookie = 'wc_criterion=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-  
+  document.cookie = '*=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+  window.location.reload()
+
 }
   render() {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
 
+    let myCookieArray = document.cookie.split("*=").splice(1)
+    let myCookieArrayFinal = []
+    let lengthCookie = myCookieArray.length
+
+    while (myCookieArray.length>0){
+      let currentArray = []
+    for (let i=0; i<3; i++){
+      let currentElem = myCookieArray[i]
+
+        currentArray.push(currentElem)
+    }
+    myCookieArray = myCookieArray.slice(3)
+    myCookieArrayFinal.push(currentArray)
+  }
+
+    console.log("FINAL: ", myCookieArrayFinal)
 
 console.log("cookie: ", document.cookie)
 
@@ -222,8 +241,11 @@ console.log("cookie: ", document.cookie)
 {/* Netlify will only allow 100 submissions/month for free */}
 {/* see example
 https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
-
-
+<ul>
+{myCookieArray.map((elem, index) => (
+  <li key={index}>{elem}</li>
+))}
+</ul>
           <table className="sopretty">
             <thead>
               <tr>
@@ -234,14 +256,25 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
               </tr>
             </thead>
             <tbody>
-              {this.state.issueList.map((elem, index) => (
+
+
+  {myCookieArrayFinal.map((elem, index) => (
+    <tr key={index}>
+    <td>{index+1}</td>
+    <td>{elem[0]}</td>
+    <td>{elem[1]}</td>
+    <td>{elem[2]}</td>
+    </tr>
+  ))}
+
+              {/* {this.state.issueList.map((elem, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{elem.wc_criterion}</td>
                   <td>{elem.notes}</td>
                   <td>{elem.priority}</td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </table>
           <button onClick={this.clearCookies}>Clear Cookies</button>

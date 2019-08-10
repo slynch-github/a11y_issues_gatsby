@@ -239,6 +239,7 @@ console.log("cookie: ", document.cookie)
         <div className="sidebar">
 
 {/* Netlify will only allow 100 submissions/month for free */}
+
 {/* see example
 https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
 <ul>

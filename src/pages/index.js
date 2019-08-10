@@ -4,7 +4,6 @@ import { graphql } from "gatsby"
 import { Button } from "react-bootstrap"
 import "bootstrap/dist/css/bootstrap.css"
 
-
 class AllIssues extends React.Component {
   constructor(props) {
     super(props)
@@ -108,9 +107,9 @@ let cookieString = cookieArray.join(" ")
 this.state.cookies = this.state.cookies + " " + cookieString
 //wc_criterion=2.4.2 Page Titled notes=hello priority=high
 //"*=2.4.2 Page Titled *=hello *=high"
-if (window.document.cookie.length>0){
+
 window.document.cookie = this.state.cookies
-}
+
 //let newCookieArray = document.cookie.split("*=")
 //console.log("newCookieArray: ", newCookieArray)
 //add to an array that i can loop over now for the table
@@ -125,13 +124,14 @@ clearCookies(){
 
 }
   render() {
+    if (typeof window !== 'undefined') {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
 
     let myCookieArray = window.document.cookie.split("*=").splice(1)
 
     let myCookieArrayFinal = []
-    let lengthCookie = myCookieArray.length
+
 
     while (myCookieArray.length>0){
       let currentArray = []
@@ -286,7 +286,11 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
       </div>
     )
   }
+
+return null
 }
+}
+
 export default AllIssues
 
 export const query = graphql`
@@ -306,3 +310,4 @@ export const query = graphql`
     }
   }
 `
+

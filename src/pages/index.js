@@ -143,7 +143,7 @@ clearCookies(){
 
     console.log("FINAL: ", myCookieArrayFinal)
 
-console.log("cookie: ", document.cookie)
+console.log("cookie: ", window.document.cookie)
 
     return (
       <div className="wrapper">

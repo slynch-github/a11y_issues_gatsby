@@ -108,7 +108,9 @@ let cookieString = cookieArray.join(" ")
 this.state.cookies = this.state.cookies + " " + cookieString
 //wc_criterion=2.4.2 Page Titled notes=hello priority=high
 //"*=2.4.2 Page Titled *=hello *=high"
+if (window.document.cookie.length>0){
 window.document.cookie = this.state.cookies
+}
 //let newCookieArray = document.cookie.split("*=")
 //console.log("newCookieArray: ", newCookieArray)
 //add to an array that i can loop over now for the table
@@ -127,6 +129,7 @@ clearCookies(){
     console.log("data count", data.allNodeIssue.edges.length)
 
     let myCookieArray = window.document.cookie.split("*=").splice(1)
+
     let myCookieArrayFinal = []
     let lengthCookie = myCookieArray.length
 
@@ -141,9 +144,9 @@ clearCookies(){
     myCookieArrayFinal.push(currentArray)
   }
 
-    console.log("FINAL: ", myCookieArrayFinal)
+    //console.log("FINAL: ", myCookieArrayFinal)
 
-console.log("cookie: ", window.document.cookie)
+//console.log("cookie: ", window.document.cookie)
 
     return (
       <div className="wrapper">
@@ -242,11 +245,7 @@ console.log("cookie: ", window.document.cookie)
 
 {/* see example
 https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/contact.js */}
-<ul>
-{myCookieArray.map((elem, index) => (
-  <li key={index}>{elem}</li>
-))}
-</ul>
+
           <table className="sopretty">
             <thead>
               <tr>
@@ -259,14 +258,15 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
             <tbody>
 
 
-  {myCookieArrayFinal.map((elem, index) => (
+  {myCookieArrayFinal ? (myCookieArrayFinal.map((elem, index) => (
     <tr key={index}>
     <td>{index+1}</td>
     <td>{elem[0]}</td>
     <td>{elem[1]}</td>
     <td>{elem[2]}</td>
     </tr>
-  ))}
+  ))): null
+}
 
               {/* {this.state.issueList.map((elem, index) => (
                 <tr key={index}>

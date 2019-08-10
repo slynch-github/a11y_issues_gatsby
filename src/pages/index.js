@@ -251,9 +251,9 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
             <thead>
               <tr>
                 <th>#</th>
-                <th>WCAG Criterion</th>
-                <th>Description</th>
-                <th>Priority</th>
+                <th>WCAG Criterion:</th>
+                <th>Description:</th>
+                <th>Priority:</th>
               </tr>
             </thead>
             <tbody>

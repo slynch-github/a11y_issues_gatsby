@@ -127,7 +127,7 @@ clearCookies(){
     if (typeof window !== 'undefined') {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-
+    console.log("state: ", this.state)
     let myCookieArray = window.document.cookie.split("*=").splice(1)
 
     let myCookieArrayFinal = []
@@ -195,7 +195,7 @@ clearCookies(){
               <div className="issue">
 
       {this.state.currentList.map((elem, index) => {
-        let notes, priority
+
 
               return (
                   <div key={index}>
@@ -216,7 +216,7 @@ clearCookies(){
                       id="priority"
                       name="priority"
                       placeholder={elem.field_default_priority}
-                      value={priority}
+                      value={this.state.priority || ""}
                       onChange={this.handleChange}
                     />
                     <br />
@@ -225,7 +225,7 @@ clearCookies(){
                   <textarea
                       id="notes"
                       name="notes"
-                      value={notes}
+                      value={this.state.notes || ""}
                       onChange={this.handleChange}
                     />
                     <button value={elem.field_wc} onClick={this.addIssue} type="submit">

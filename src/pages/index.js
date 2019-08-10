@@ -127,7 +127,7 @@ clearCookies(){
     if (typeof window !== 'undefined') {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-    console.log("state: ", this.state)
+
     let myCookieArray = window.document.cookie.split("*=").splice(1)
 
     let myCookieArrayFinal = []

@@ -108,7 +108,7 @@ let cookieString = cookieArray.join(" ")
 this.state.cookies = this.state.cookies + " " + cookieString
 //wc_criterion=2.4.2 Page Titled notes=hello priority=high
 //"*=2.4.2 Page Titled *=hello *=high"
-document.cookie = this.state.cookies
+window.document.cookie = this.state.cookies
 //let newCookieArray = document.cookie.split("*=")
 //console.log("newCookieArray: ", newCookieArray)
 //add to an array that i can loop over now for the table
@@ -118,7 +118,7 @@ document.cookie = this.state.cookies
   }
 
 clearCookies(){
-  document.cookie = '*=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+  window.document.cookie = '*=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
   window.location.reload()
 
 }
@@ -126,7 +126,7 @@ clearCookies(){
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
 
-    let myCookieArray = document.cookie.split("*=").splice(1)
+    let myCookieArray = window.document.cookie.split("*=").splice(1)
     let myCookieArrayFinal = []
     let lengthCookie = myCookieArray.length
 

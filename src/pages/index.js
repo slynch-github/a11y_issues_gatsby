@@ -17,8 +17,7 @@ class AllIssues extends React.Component {
       currentList: [],
       issue: [],
       count: 0,
-      finalCookieArray: [],
-      cookies: ""
+      finalCookieArray: []
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -89,30 +88,23 @@ class AllIssues extends React.Component {
     this.state.count++
     let cookieArray = ["*="+evt.target.value, "*="+this.state.notes, "*="+this.state.priority]
 
-   //this.state.finalCookieArray.push(cookieArray)
-//     let cookies = "wc_criterion="+evt.target.value+" notes="+this.state.notes+" priority="+this.state.priority+""
-//  document.cookie = cookies
     //save the issues on a cookie!
 
-    this.state.issueList.push({
-      wc_criterion: evt.target.value,
-      notes: this.state.notes,
-      priority: this.state.priority,
-    })
+    // this.state.issueList.push({
+    //   wc_criterion: evt.target.value,
+    //   notes: this.state.notes,
+    //   priority: this.state.priority,
+    // })
 
 let cookieString = cookieArray.join(" ")
-//console.log("cookie Array: ", cookieArray)
-//["wc_criterion=2.4.2 Page Titled", "notes=hello", "priority=high"]
-//console.log("cookie String: ", cookieString)
-this.state.cookies = this.state.cookies + " " + cookieString
-//wc_criterion=2.4.2 Page Titled notes=hello priority=high
-//"*=2.4.2 Page Titled *=hello *=high"
 
-window.document.cookie = this.state.cookies
+let myDate = "; expires=Fri, 31 Dec 9999 12:00:00 UTC"
+if (window.document.cookie.length>0){
+  window.document.cookie = window.document.cookie + " " + cookieString + myDate
+}else {
+  window.document.cookie = cookieString + myDate
+}
 
-//let newCookieArray = document.cookie.split("*=")
-//console.log("newCookieArray: ", newCookieArray)
-//add to an array that i can loop over now for the table
 
     this.setState({ wc_criterion: "", notes: "", priority: "" })
 
@@ -127,6 +119,7 @@ clearCookies(){
     if (typeof window !== 'undefined') {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
+
 
     let myCookieArray = window.document.cookie.split("*=").splice(1)
 
@@ -144,9 +137,7 @@ clearCookies(){
     myCookieArrayFinal.push(currentArray)
   }
 
-    //console.log("FINAL: ", myCookieArrayFinal)
 
-//console.log("cookie: ", window.document.cookie)
 
     return (
       <div className="wrapper">

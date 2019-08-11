@@ -8,6 +8,7 @@ class AllIssues extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      issues: [{notes: "", priority: "", wc_criterion: ""}],
       notes: "",
       priority: "",
       wc_criterion: "",
@@ -37,16 +38,22 @@ class AllIssues extends React.Component {
      for (let i=0; i<elem.node.field_how_to_test.length; i++){
       if (!(elem.node.field_how_to_test[i] in myToolList)) {
         myToolList[elem.node.field_how_to_test[i]] = [elem.node]
+
       } else {
         myToolList[elem.node.field_how_to_test[i]].push(elem.node)
       }
     }
     })
     this.props.data.allNodeIssue.edges.forEach(elem => {
+      this.setState((prevState) => ({
+        issues: [...prevState.issues, {notes: "", priority: "", wc_criterion: ""}],
+      }))
       if (!(elem.node.field_area_of_concern in myButtonList)) {
         myButtonList[elem.node.field_area_of_concern] = [elem.node]
+
       } else {
         myButtonList[elem.node.field_area_of_concern].push(elem.node)
+
       }
     })
     let newArray = []
@@ -57,6 +64,7 @@ class AllIssues extends React.Component {
       }
     }
     this.setState({ currentList: newArray, myButtons: myButtonList, myTools: myToolList })
+
   }
 
   filter(evt) {
@@ -78,15 +86,18 @@ class AllIssues extends React.Component {
   }
 
   handleChange(evt) {
-    const name = evt.target.name
-    const value = evt.target.value
-    this.setState({ [name]: value })
+    let issues = [...this.state.issues]
+    issues[evt.target.dataset.id][evt.target.className] = evt.target.value
+    this.setState({issues}, () => console.log(this.state.issues))
+    // const name = evt.target.name
+    // const value = evt.target.value
+    // this.setState({ [name]: value })
   }
 
   addIssue(evt) {
     evt.preventDefault()
     this.state.count++
-    let cookieArray = ["*="+evt.target.value, "*="+this.state.notes, "*="+this.state.priority]
+    let cookieArray = ["*="+evt.target.value, "*="+this.state.issues[0].notes, "*="+this.state.issues[0].priority]
 
     //save the issues on a cookie!
 
@@ -104,9 +115,6 @@ if (window.document.cookie.length>0){
 }else {
   window.document.cookie = cookieString + myDate
 }
-
-
-    this.setState({ wc_criterion: "", notes: "", priority: "" })
 
   }
 
@@ -206,8 +214,10 @@ clearCookies(){
                       type="text"
                       id="priority"
                       name="priority"
+                      data-id={index}
+                      className="priority"
                       placeholder={elem.field_default_priority}
-                      value={this.state.priority || ""}
+                      value={this.state.issues[index].priority || ""}
                       onChange={this.handleChange}
                     />
                     <br />
@@ -216,7 +226,9 @@ clearCookies(){
                   <textarea
                       id="notes"
                       name="notes"
-                      value={this.state.notes || ""}
+                      data-id={index}
+                      className="notes"
+                      value={this.state.issues[index].notes || ""}
                       onChange={this.handleChange}
                     />
                     <button value={elem.field_wc} onClick={this.addIssue} type="submit">

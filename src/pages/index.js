@@ -11,13 +11,10 @@ class AllIssues extends React.Component {
       issues: [{notes: "", priority: "", wc_criterion: ""}],
       notes: "",
       priority: "",
-      wc_criterion: "",
-      issueList: [],
       myButtons: "",
       myTools: "",
       currentList: [],
       issue: [],
-      count: 0,
       finalCookieArray: []
     }
 
@@ -96,7 +93,7 @@ class AllIssues extends React.Component {
 
   addIssue(evt) {
     evt.preventDefault()
-    this.state.count++
+
     let cookieArray = ["*="+evt.target.value, "*="+this.state.issues[0].notes, "*="+this.state.issues[0].priority]
 
     //save the issues on a cookie!
@@ -115,7 +112,9 @@ if (window.document.cookie.length>0){
 }else {
   window.document.cookie = cookieString + myDate
 }
-
+// this.state.issues[0].notes = ""
+// this.state.issues[0].priority = ""
+window.location.reload()
   }
 
 clearCookies(){
@@ -127,7 +126,6 @@ clearCookies(){
     if (typeof window !== 'undefined') {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-
 
     let myCookieArray = window.document.cookie.split("*=").splice(1)
 
@@ -271,14 +269,6 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
   ))): null
 }
 
-              {/* {this.state.issueList.map((elem, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{elem.wc_criterion}</td>
-                  <td>{elem.notes}</td>
-                  <td>{elem.priority}</td>
-                </tr>
-              ))} */}
             </tbody>
           </table>
           <button onClick={this.clearCookies}>Clear Cookies</button>

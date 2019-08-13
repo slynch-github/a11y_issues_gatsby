@@ -186,7 +186,6 @@ clearCookies(){
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
 
-   
 
 
     return (

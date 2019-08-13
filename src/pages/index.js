@@ -11,11 +11,13 @@ class AllIssues extends React.Component {
       issues: [{notes: "", priority: "", wc_criterion: ""}],
       notes: "",
       priority: "",
+      wc_criterion: "",
       myButtons: "",
       myTools: "",
       currentList: [],
       issue: [],
-      finalCookieArray: []
+      finalCookieArray: [],
+      cookieArrayFinal: []
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -47,10 +49,10 @@ class AllIssues extends React.Component {
       }))
       if (!(elem.node.field_area_of_concern in myButtonList)) {
         myButtonList[elem.node.field_area_of_concern] = [elem.node]
-
+       
       } else {
         myButtonList[elem.node.field_area_of_concern].push(elem.node)
-
+       
       }
     })
     let newArray = []
@@ -85,7 +87,7 @@ class AllIssues extends React.Component {
   handleChange(evt) {
     let issues = [...this.state.issues]
     issues[evt.target.dataset.id][evt.target.className] = evt.target.value
-    this.setState({issues}, () => console.log(this.state.issues))
+    this.setState({issues}, () => this.state.issues)
     // const name = evt.target.name
     // const value = evt.target.value
     // this.setState({ [name]: value })
@@ -93,9 +95,19 @@ class AllIssues extends React.Component {
 
   addIssue(evt) {
     evt.preventDefault()
-
-    let cookieArray = ["*="+evt.target.value, "*="+this.state.issues[0].notes, "*="+this.state.issues[0].priority]
-
+    let newNote = ""
+    let newPriority = ""
+let newIssues = [...this.state.issues]
+for (let i=0; i<newIssues.length; i++){
+  let currentIssue = newIssues[i]
+  
+  if (currentIssue.notes.length>0){
+    newNote = currentIssue.notes
+    newPriority = currentIssue.priority
+  }
+}
+    let cookieArray = ["*="+evt.target.value, "*="+newNote, "*="+newPriority]
+//let cookieArray = ["*="+evt.target.value, "*="+this.state.notes, "*="+this.state.priority]
     //save the issues on a cookie!
 
     // this.state.issueList.push({
@@ -108,13 +120,42 @@ let cookieString = cookieArray.join(" ")
 
 let myDate = "; expires=Fri, 31 Dec 9999 12:00:00 UTC"
 if (window.document.cookie.length>0){
-  window.document.cookie = window.document.cookie + " " + cookieString + myDate
+  window.document.cookie = window.document.cookie + cookieString + myDate
 }else {
   window.document.cookie = cookieString + myDate
 }
-// this.state.issues[0].notes = ""
-// this.state.issues[0].priority = ""
-window.location.reload()
+
+let clearIssues = [...this.state.issues]
+for (let i=0; i<clearIssues.length; i++){
+  let currentIssue = clearIssues[i]
+  
+  if (currentIssue.notes.length>0){
+    currentIssue.notes = ""
+    currentIssue.priority = ""
+  }
+}
+
+this.setState({issues: clearIssues})
+
+let myCookieArray = window.document.cookie.split("*=").splice(1)
+
+let myCookieArrayFinal = []
+this.setState({cookieArrayFinal: []})
+
+
+while (myCookieArray.length>0){
+  let currentArray = []
+for (let i=0; i<3; i++){
+  let currentElem = myCookieArray[i]
+
+    currentArray.push(currentElem)
+}
+myCookieArray = myCookieArray.slice(3)
+myCookieArrayFinal.push(currentArray)
+}
+
+this.setState({cookieArrayFinal: myCookieArrayFinal})
+
   }
 
 clearCookies(){
@@ -127,22 +168,7 @@ clearCookies(){
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
 
-    let myCookieArray = window.document.cookie.split("*=").splice(1)
-
-    let myCookieArrayFinal = []
-
-
-    while (myCookieArray.length>0){
-      let currentArray = []
-    for (let i=0; i<3; i++){
-      let currentElem = myCookieArray[i]
-
-        currentArray.push(currentElem)
-    }
-    myCookieArray = myCookieArray.slice(3)
-    myCookieArrayFinal.push(currentArray)
-  }
-
+   
 
 
     return (
@@ -193,7 +219,6 @@ clearCookies(){
 
       {this.state.currentList.map((elem, index) => {
 
-
               return (
                   <div key={index}>
                     <div><strong>Area of Concern: </strong>{elem.field_area_of_concern}</div>
@@ -201,7 +226,7 @@ clearCookies(){
                     <strong>Issue: </strong>{elem.field_issue}
                     <div><strong>How to Test: </strong>{elem.field_how_to_test}</div>
                     <div><strong>WCAG Criterion: </strong>{elem.field_wc}</div>
-
+                 
                     <div>
                       <a href={elem.field_understanding_link}>
                         Understanding the Criterion
@@ -215,6 +240,7 @@ clearCookies(){
                       data-id={index}
                       className="priority"
                       placeholder={elem.field_default_priority}
+                      
                       value={this.state.issues[index].priority || ""}
                       onChange={this.handleChange}
                     />
@@ -235,6 +261,9 @@ clearCookies(){
                   </div>
                 )}
       )}
+
+
+
               </div>{" "}
             </form>
           </Layout>
@@ -259,7 +288,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
             <tbody>
 
 
-  {myCookieArrayFinal ? (myCookieArrayFinal.map((elem, index) => (
+  {this.state.cookieArrayFinal ? (this.state.cookieArrayFinal.map((elem, index) => (
     <tr key={index}>
     <td>{index+1}</td>
     <td>{elem[0]}</td>

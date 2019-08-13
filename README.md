@@ -13,4 +13,5 @@ Things I am learning more about while working on this site:
 * using Gatsby plugins
 * deploying on Netlify
 * using the window object with Gatsby/React
+* creating dynamic forms with React
 * using cookies

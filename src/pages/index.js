@@ -64,6 +64,24 @@ class AllIssues extends React.Component {
     }
     this.setState({ currentList: newArray, myButtons: myButtonList, myTools: myToolList })
 
+    let myCookieArray = window.document.cookie.split("*=").splice(1)
+
+    let myCookieArrayFinal = []
+    
+    
+    while (myCookieArray.length>0){
+      let currentArray = []
+    for (let i=0; i<3; i++){
+      let currentElem = myCookieArray[i]
+    
+        currentArray.push(currentElem)
+    }
+    myCookieArray = myCookieArray.slice(3)
+    myCookieArrayFinal.push(currentArray)
+    }
+    
+    this.setState({cookieArrayFinal: myCookieArrayFinal})
+    
   }
 
   filter(evt) {
@@ -120,7 +138,7 @@ let cookieString = cookieArray.join(" ")
 
 let myDate = "; expires=Fri, 31 Dec 9999 12:00:00 UTC"
 if (window.document.cookie.length>0){
-  window.document.cookie = window.document.cookie + cookieString + myDate
+  window.document.cookie = window.document.cookie + " " + cookieString + myDate
 }else {
   window.document.cookie = cookieString + myDate
 }

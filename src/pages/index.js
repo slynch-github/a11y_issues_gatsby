@@ -85,7 +85,12 @@ class AllIssues extends React.Component {
   }
 
   filter(evt) {
-    this.setState({ currentList: this.state.myButtons[evt.target.value] })
+    if (evt.target.value === "all"){
+      this.viewAll()
+    }else {
+      this.setState({ currentList: this.state.myButtons[evt.target.value] })
+    }
+    
   }
   filterTools(evt) {
     this.setState({ currentList: this.state.myTools[evt.target.value] })
@@ -196,7 +201,8 @@ clearCookies(){
             <div className="buttonFilters">
               <Button
                 size="sm"
-                variant="light"
+                block
+                variant="secondary"
                 onClick={this.viewAll}
                 type="submit"
               >
@@ -204,8 +210,10 @@ clearCookies(){
               </Button>
 
               <select onChange={this.filter}>
+              <option value="all">Select an area of concern:</option>
               {this.state.myButtons
                 ?
+                
                 Object.keys(this.state.myButtons).map((key, index) => (
                       <option
                         key={index}
@@ -275,6 +283,7 @@ clearCookies(){
                     <button value={elem.field_wc} onClick={this.addIssue} type="submit">
                       Add Issue to Report
                     </button>
+                    <hr className="divider" />
                   </div>
                 )}
       )}

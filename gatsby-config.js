@@ -3,7 +3,7 @@ module.exports = {
         {
           resolve: `gatsby-source-drupal`,
           options: {
-            baseUrl: 'http://dev-a11y-issues.pantheonsite.io/jsonapi/node/issue?page[limit]=300&page[offset]=10'
+            baseUrl: 'http://dev-a11y-issues.pantheonsite.io/jsonapi/node/issue?page[limit]=350&page[offset]=10'
           },
         },
         `gatsby-plugin-emotion`,

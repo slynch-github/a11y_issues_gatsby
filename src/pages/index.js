@@ -210,7 +210,7 @@ clearCookies(){
               </Button>
 
               <select onChange={this.filter}>
-              <option value="all">Select an area of concern:</option>
+              <option value="all">Select an area of concern</option>
               {this.state.myButtons
                 ?
                 

@@ -142,6 +142,7 @@ for (let i=0; i<newIssues.length; i++){
 let cookieString = cookieArray.join(" ")
 
 let myDate = "; expires=Fri, 31 Dec 9999 12:00:00 UTC"
+
 if (window.document.cookie.length>0){
   window.document.cookie = window.document.cookie + " " + cookieString + myDate
 }else {
@@ -180,6 +181,7 @@ myCookieArrayFinal.push(currentArray)
 this.setState({cookieArrayFinal: myCookieArrayFinal})
 
   }
+  
 
 clearCookies(){
   window.document.cookie = '*=; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
@@ -190,7 +192,8 @@ clearCookies(){
     if (typeof window !== 'undefined') {
     const { data } = this.props
     console.log("data count", data.allNodeIssue.edges.length)
-
+    console.log("finalcookiearray", this.state.finalCookieArray)
+    console.log("cookieArrayFinal", this.state.cookieArrayFinal)
 
 
     return (
@@ -280,7 +283,7 @@ clearCookies(){
                       value={this.state.issues[index].notes || ""}
                       onChange={this.handleChange}
                     />
-                    <button value={elem.field_wc} onClick={this.addIssue} type="submit">
+                    <button value={`${elem.field_understanding_link},${elem.field_wc}`} onClick={this.addIssue} type="submit">
                       Add Issue to Report
                     </button>
                     <hr className="divider" />
@@ -317,7 +320,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
   {this.state.cookieArrayFinal ? (this.state.cookieArrayFinal.map((elem, index) => (
     <tr key={index}>
     <td>{index+1}</td>
-    <td>{elem[0]}</td>
+    <td><a href={`${elem[0].split(",")[0]}`}>{`${elem[0].split(",")[1]}`}</a></td>
     <td>{elem[1]}</td>
     <td>{elem[2]}</td>
     </tr>

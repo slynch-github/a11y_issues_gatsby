@@ -283,7 +283,7 @@ clearCookies(){
                       value={this.state.issues[index].notes || ""}
                       onChange={this.handleChange}
                     />
-                    <button value={`${elem.field_understanding_link},${elem.field_wc}`} onClick={this.addIssue} type="submit">
+                    <button value={`${elem.field_understanding_link}^${elem.field_wc}`} onClick={this.addIssue} type="submit">
                       Add Issue to Report
                     </button>
                     <hr className="divider" />
@@ -320,7 +320,7 @@ https://github.com/sw-yx/gatsby-netlify-form-example-v2/blob/master/src/pages/co
   {this.state.cookieArrayFinal ? (this.state.cookieArrayFinal.map((elem, index) => (
     <tr key={index}>
     <td>{index+1}</td>
-    <td><a href={`${elem[0].split(",")[0]}`}>{`${elem[0].split(",")[1]}`}</a></td>
+    <td><a href={`${elem[0].split("^")[0]}`}>{`${elem[0].split("^")[1]}`}</a></td>
     <td>{elem[1]}</td>
     <td>{elem[2]}</td>
     </tr>
